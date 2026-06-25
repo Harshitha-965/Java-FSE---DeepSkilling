@@ -1,4 +1,4 @@
-package Week_2_AlgorithmsAndDataStructures.Ex_7_FinancialForecasting;
+package Week_1_AlgorithmsAndDataStructures.Ex_7_FinancialForecasting;
 
 public class ForecastTest {
     public static void main(String args[]){

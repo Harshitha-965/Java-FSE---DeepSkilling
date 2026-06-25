@@ -1,4 +1,4 @@
-package Week_2_AlgorithmsAndDataStructures.Ex_7_FinancialForecasting;
+package Week_1_AlgorithmsAndDataStructures.Ex_7_FinancialForecasting;
 
 public class FinancialForecast {
     public static double predictFutureValues(double currentValue,double growthRate,int years){

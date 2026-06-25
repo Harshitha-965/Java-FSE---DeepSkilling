@@ -1,4 +1,4 @@
-package Week_2_AlgorithmsAndDataStructures.Ex_2_EcommercePlatform;
+package Week_1_AlgorithmsAndDataStructures.Ex_2_EcommercePlatform;
 
 public class SearchTest {
     public static void main(String args[]){

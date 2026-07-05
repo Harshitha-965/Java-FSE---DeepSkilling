@@ -35,6 +35,7 @@ BEGIN
 
         END IF;
     END LOOP;
+    COMMIT;
 END;
 /
 -- ------------------------------------------------------
@@ -67,6 +68,7 @@ BEGIN
             );
         END IF;
     END LOOP;
+    COMMIT;
 END;
 /
 -- ------------------------------------------------------
@@ -94,5 +96,6 @@ BEGIN
             TO_CHAR(loan_record.ENDDATE,'DD-MON-YYYY')
         );
     END LOOP;
+    COMMIT;
 END;
 /

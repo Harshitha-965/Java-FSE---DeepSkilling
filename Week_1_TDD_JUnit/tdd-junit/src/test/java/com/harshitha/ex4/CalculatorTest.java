@@ -34,7 +34,7 @@ public class CalculatorTest {
         
         //Assert
         assertEquals(8, result);
-
+        
     }
 
 }

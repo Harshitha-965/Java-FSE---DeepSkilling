@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.library</groupId>
-  <artifactId>library_management</artifactId>
+  <artifactId>library_management_ex1</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>library_management_ex1</name>
+  <name>library_management</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

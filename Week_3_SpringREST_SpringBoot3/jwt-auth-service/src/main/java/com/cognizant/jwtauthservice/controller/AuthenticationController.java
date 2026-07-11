@@ -24,25 +24,22 @@ public class AuthenticationController {
     public Map<String, String> authenticate(
             @RequestHeader("Authorization") String authorizationHeader) {
 
-        // Remove "Basic "
         String base64Credentials = authorizationHeader.substring(6);
 
-        // Decode Base64 credentials
         byte[] decodedBytes = Base64.getDecoder().decode(base64Credentials);
 
         String credentials =
                 new String(decodedBytes, StandardCharsets.UTF_8);
 
-        // Split username and password
+ 
         String[] values = credentials.split(":");
 
         String username = values[0];
 
-        // Generate signing key
+     
         Key key = Keys.hmacShaKeyFor(
                 SECRET.getBytes(StandardCharsets.UTF_8));
 
-        // Generate JWT
         String token = Jwts.builder()
                 .subject(username)
                 .issuedAt(new Date())

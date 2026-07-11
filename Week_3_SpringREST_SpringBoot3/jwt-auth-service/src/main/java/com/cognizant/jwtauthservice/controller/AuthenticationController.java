@@ -21,24 +21,14 @@ public class AuthenticationController {
             "mysecretkeymysecretkeymysecretkey12";
 
     @GetMapping("/authenticate")
-    public Map<String, String> authenticate(
-            @RequestHeader("Authorization") String authorizationHeader) {
+    public Map<String, String> authenticate(@RequestHeader("Authorization") String authorizationHeader) {
 
         String base64Credentials = authorizationHeader.substring(6);
-
         byte[] decodedBytes = Base64.getDecoder().decode(base64Credentials);
-
-        String credentials =
-                new String(decodedBytes, StandardCharsets.UTF_8);
-
- 
+        String credentials = new String(decodedBytes, StandardCharsets.UTF_8);
         String[] values = credentials.split(":");
-
         String username = values[0];
-
-     
-        Key key = Keys.hmacShaKeyFor(
-                SECRET.getBytes(StandardCharsets.UTF_8));
+        Key key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
 
         String token = Jwts.builder()
                 .subject(username)
@@ -48,9 +38,7 @@ public class AuthenticationController {
                 .compact();
 
         Map<String, String> response = new HashMap<>();
-
         response.put("token", token);
-
         return response;
     }
 

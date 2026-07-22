@@ -1,0 +1,49 @@
+===================================
+Week 5 & 6 - Angular Hands-on Notes
+===================================
+
+1. angular.json
+Purpose:
+Contains the Angular project configuration such as build settings, assets, styles, scripts, and development server options.
+
+------------------------------------------------------------
+
+2. tsconfig.json
+Purpose:
+The main TypeScript configuration file that defines compiler options for the entire Angular project.
+
+------------------------------------------------------------
+
+3. tsconfig.app.json
+Purpose:
+Extends tsconfig.json and contains TypeScript settings specifically for compiling the Angular application source code.
+
+------------------------------------------------------------
+
+4. package.json
+Purpose:
+Stores project information, npm scripts, and all project dependencies required to run the Angular application.
+
+------------------------------------------------------------
+
+5. src/main.ts
+Purpose:
+The entry point of the Angular application that bootstraps the root App component.
+
+------------------------------------------------------------
+
+6. src/app/app.config.ts
+Purpose:
+Configures the standalone Angular application by registering providers, routing, and other application-level settings.
+
+------------------------------------------------------------
+
+7. src/app/app.ts
+Purpose:
+The root component of the Angular application that controls the main user interface.
+
+------------------------------------------------------------
+
+8. src/index.html
+Purpose:
+The main HTML page loaded by the browser where the Angular application is rendered.

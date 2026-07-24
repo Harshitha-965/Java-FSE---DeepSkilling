@@ -1,0 +1,27 @@
+.card--enrolled{
+
+    border:2px solid green;
+
+    background:#e8ffe8;
+
+    padding:10px;
+
+    margin-bottom:15px;
+
+    border-radius:8px;
+
+}
+
+.card--full{
+
+    box-shadow:0 0 8px steelblue;
+
+}
+
+.expanded{
+
+    min-height:220px;
+
+    transition:0.3s;
+
+}

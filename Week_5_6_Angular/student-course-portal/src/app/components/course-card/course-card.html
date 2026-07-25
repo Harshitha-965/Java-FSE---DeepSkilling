@@ -11,10 +11,8 @@
   }">
 
   <h3>{{ course.name }}</h3>
-
   <p>Code: {{ course.code }}</p>
-
- <p>Credits: {{ course.credits | creditLabel }}</p>
+  <p>Credits: {{ course.credits | creditLabel }}</p>
 
   <div [ngSwitch]="course.gradeStatus">
 
@@ -32,9 +30,10 @@
 
   </div>
 
-  <button
-    (click)="enrollRequested.emit(course.id)">
-    Enroll
+  <button (click)="onEnrollClick()">
+    {{ enrollmentService.isEnrolled(course.id)
+        ? 'Unenroll'
+        : 'Enroll' }}
   </button>
 
   <button (click)="toggleDetails()">

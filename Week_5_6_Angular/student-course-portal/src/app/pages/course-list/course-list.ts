@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CourseCard } from '../../components/course-card/course-card';
 import { NgFor, NgIf } from '@angular/common';
 import { HighlightDirective } from '../../directives/highlight';
+import { CourseService } from '../../services/course';
+import { Course } from '../../models/course.model';
 
 @Component({
   selector: 'app-course-list',
@@ -11,71 +13,20 @@ import { HighlightDirective } from '../../directives/highlight';
 })
 export class CourseList implements OnInit{
   isLoading = true;
-
-  courses = [
-    {
-      id:1,
-      name:'Java Programming',
-      code:'CS101',
-      credits:4,
-      gradeStatus:'passed',
-      enrolled: false
-    },
-
-    {
-      id:2,
-      name:'Angular Development',
-      code:'CS202',
-      credits:3,
-      gradeStatus:'pending',
-      enrolled: false
-    },
-
-    {
-      id:3,
-      name:'Spring Boot',
-      code:'CS303',
-      credits:4,
-      gradeStatus:'passed',
-      enrolled: false
-    },
-
-    {
-      id:4,
-      name:'Python Programming',
-      code:'CS404',
-      credits:3,
-      gradeStatus:'failed',
-      enrolled: false
-    },
-
-    {
-      id:5,
-      name:'Database Systems',
-      code:'CS505',
-      credits:4,
-      gradeStatus:'pending',
-      enrolled: false
-    }
-
-  ];
+  courses: Course[] = []
+  
+  constructor(private courseService: CourseService) {}
 
   selectedCourseId: number | null = null;
 
   onEnroll(courseId: number): void {
     console.log('Enrolling in course: ' + courseId);
     this.selectedCourseId = courseId;
-
-    const selectedCourse = this.courses.find(
-      course => course.id === courseId
-    );
-
-    if(selectedCourse){
-      selectedCourse.enrolled = true;
-    }
   }
 
   ngOnInit(): void {
+    this.courses=this.courseService.getCourses();
+    console.log(this.courses);
     setTimeout(()=>{
       this.isLoading = false;
     },1500);
@@ -83,7 +34,7 @@ export class CourseList implements OnInit{
   // trackBy helps Angular identify list items uniquely using their ID.
   // This improves performance because Angular updates only changed items
   // instead of recreating the entire list.
-  trackByCourseId(index: number, course: any): number {
+  trackByCourseId(index: number, course: Course): number {
     return course.id;
   }
 

@@ -2,7 +2,8 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from
 import { NgSwitch, NgSwitchCase, NgSwitchDefault, NgClass, NgStyle } from '@angular/common';
 import { HighlightDirective } from '../../directives/highlight';
 import { CreditLabelPipe } from '../../pipes/credit-label-pipe'
-'../../pipes/credit-label';
+import { EnrollmentService } from '../../services/enrollment';
+
 @Component({
   selector: 'app-course-card',
   imports: [NgSwitch, NgSwitchCase, NgSwitchDefault, NgClass, NgStyle, HighlightDirective, CreditLabelPipe],
@@ -24,6 +25,7 @@ export class CourseCard implements OnChanges{
   enrollRequested = new EventEmitter<number>();
 
   isExpanded = false;
+  constructor(public enrollmentService: EnrollmentService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('Course Input Changed');
@@ -36,16 +38,21 @@ export class CourseCard implements OnChanges{
   }
 
   get cardClasses() {
-
     return {
-
-      'card--enrolled': this.course.enrolled,
-
+      'card--enrolled': this.enrollmentService.isEnrolled(this.course.id),
       'card--full': this.course.credits >= 4,
-
       'expanded': this.isExpanded
-
     };
+  }
 
+  onEnrollClick(): void {
+      if (this.enrollmentService.isEnrolled(this.course.id)) {
+          this.enrollmentService.unenroll(this.course.id);
+      } 
+      else {
+          this.enrollmentService.enroll(this.course.id);
+      }
+
+      this.enrollRequested.emit(this.course.id);
   }
 }

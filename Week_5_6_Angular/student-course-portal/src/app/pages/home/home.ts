@@ -1,8 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CourseService } from '../../services/course';
+import { CourseSummaryWidget } from '../../components/course-summary-widget/course-summary-widget';
+import { StudentProfile } from '../../components/student-profile/student-profile';
+import { Notification } from '../../components/notification/notification';
 @Component({
   selector: 'app-home',
-  imports: [FormsModule],
+  imports: [FormsModule, CourseSummaryWidget, StudentProfile, Notification],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -11,18 +15,19 @@ export class Home implements OnInit, OnDestroy {
   portalName = 'Student Course Portal';
   isPortalActive = true;
   message = '';
+  courseCount = 0;
+
   // Property Binding [property] updates the DOM from the component (one-way).
   // Two-Way Binding [(ngModel)] keeps the component and the DOM synchronized (two-way).
   searchTerm = '';
 
-  availableCourses=0;
-
+  constructor(private courseService: CourseService) {}
   onEnrollClick() {
     this.message = 'Enrollment opened!';
   }
 
   ngOnInit(): void {
-    this.availableCourses = 12;
+    this.courseCount = this.courseService.getCourses().length;
     console.log('HomeComponent initialised — courses loaded');
   }
 

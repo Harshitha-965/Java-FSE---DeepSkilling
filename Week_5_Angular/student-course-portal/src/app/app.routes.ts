@@ -4,7 +4,8 @@ import { CourseList } from './pages/course-list/course-list';
 import { StudentProfile } from './pages/student-profile/student-profile';
 import { EnrollmentForm } from './pages/enrollment-form/enrollment-form';
 import { ReactiveEnrollmentForm } from './pages/reactive-enrollment-form/reactive-enrollment-form';
-
+import { CourseDetail } from './pages/course-detail/course-detail';
+import { NotFound } from './pages/not-found/not-found';
 export const routes: Routes = [
     {
         path: '',
@@ -14,6 +15,11 @@ export const routes: Routes = [
         path: 'courses',
         component: CourseList
     },
+    {
+    path: 'courses/:id',
+        component: CourseDetail
+    },
+
     {
         path: 'profile',
         component: StudentProfile
@@ -25,5 +31,9 @@ export const routes: Routes = [
     {
         path:'enroll-reactive',
         component:ReactiveEnrollmentForm
+    },
+    {
+        path: '**',
+        component: NotFound
     }
 ];

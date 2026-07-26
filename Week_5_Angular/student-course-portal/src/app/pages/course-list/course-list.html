@@ -9,9 +9,13 @@
 
 <h2>Available Courses</h2>
 
-<p *ngIf="isLoading">
-  Loading courses...
-</p>
+<div *ngIf="isLoading">
+    Loading courses...
+</div>
+
+<div *ngIf="errorMessage">
+    {{ errorMessage }}
+</div>
 
 <div *ngIf="!isLoading">
 
@@ -24,8 +28,9 @@
 
       <app-course-card
         [course]="course"
-        (enrollRequested)="onEnroll($event)">
-      </app-course-card>
+        (enrollRequested)="onEnroll($event)"
+        (deleteRequested)="deleteCourse($event)">
+    </app-course-card>
 
     </div>
 
@@ -36,7 +41,22 @@
 <ng-template #noCourses>
   <p>No courses available.</p>
 </ng-template>
+<hr>
 
+<button (click)="addSampleCourse()">
+    Add Sample Course
+</button>
+<hr>
+
+<button (click)="updateFirstCourse()">
+    Update First Course
+</button>
+<hr>
+
+<button (click)="deleteCourse(3)">
+    Delete Course 3
+</button>
+<hr>
 <p *ngIf="selectedCourseId">
   Selected Course ID: {{ selectedCourseId }}
 </p>

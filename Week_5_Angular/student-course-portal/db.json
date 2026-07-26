@@ -1,0 +1,71 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "name": "Advanced Angular",
+      "code": "ANG999",
+      "credits": 5,
+      "enrolled": false,
+      "gradeStatus": "passed"
+    },
+    {
+      "id": "2",
+      "name": "Spring Boot",
+      "code": "SPR201",
+      "credits": 3,
+      "enrolled": false,
+      "gradeStatus": "passed"
+    },
+    {
+      "id": "3",
+      "name": "Dummy",
+      "code": "DUM101",
+      "credits": 0,
+      "enrolled": false,
+      "gradeStatus": "pending"
+    },
+    {
+      "name": "Java Programming",
+      "code": "JAVA101",
+      "credits": 5,
+      "enrolled": false,
+      "gradeStatus": "pending",
+      "id": "4"
+    }
+  ],
+  "students": [
+    {
+      "id": "1",
+      "name": "Harshitha",
+      "courseId": 1
+    },
+    {
+      "id": "2",
+      "name": "Kaaviya",
+      "courseId": 2
+    },
+    {
+      "id": 3,
+      "name": "Priya",
+      "courseId": 2
+    },
+    {
+      "id": 4,
+      "name": "Karthik",
+      "courseId": 3
+    }
+  ],
+  "enrollments": [
+    {
+      "id": "1",
+      "courseId": 1,
+      "studentId": 1
+    },
+    {
+      "id": "2",
+      "courseId": 2,
+      "studentId": 2
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -9,3 +9,11 @@
     <p><strong>Status:</strong> {{ course.gradeStatus }}</p>
 
 </div>
+
+<h3>Enrolled Students</h3>
+
+<ul>
+    <li *ngFor="let student of students">
+        {{ student.name }}
+    </li>
+</ul>

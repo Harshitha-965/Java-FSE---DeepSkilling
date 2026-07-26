@@ -55,4 +55,12 @@ export class CourseCard implements OnChanges{
 
       this.enrollRequested.emit(this.course.id);
   }
+  @Output()
+  deleteRequested = new EventEmitter<number>();
+
+  onDeleteClick(event: MouseEvent): void {
+    event.stopPropagation();
+    this.deleteRequested.emit(this.course.id);
+  }
+  
 }

@@ -18,6 +18,7 @@ export class CourseList implements OnInit{
   isLoading = true;
   courses: Course[] = []
   searchTerm = '';
+  errorMessage = '';
 
   constructor(
     private courseService: CourseService,
@@ -33,17 +34,24 @@ export class CourseList implements OnInit{
   }
 
   ngOnInit(): void {
-    this.courses=this.courseService.getCourses();
-    console.log(this.courses);
-    const search = this.route.snapshot.queryParamMap.get('search');
-
-    if (search) {
-      this.searchTerm = search;
-    }
-    setTimeout(()=>{
-      this.isLoading = false;
-    },1500);
+    this.loadCourses();
   }
+
+  loadCourses(): void {
+    this.isLoading = true;
+    this.courseService.getCourses().subscribe({
+      next: (courses) => {
+        this.courses = courses;
+      },
+      error: (err) => {
+        this.errorMessage = err.message;
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
+  }
+
   // trackBy helps Angular identify list items uniquely using their ID.
   // This improves performance because Angular updates only changed items
   // instead of recreating the entire list.
@@ -59,6 +67,57 @@ export class CourseList implements OnInit{
     this.router.navigate(['courses'], {
       queryParams: {
         search: this.searchTerm
+      }
+    });
+  }
+
+  addSampleCourse(): void {
+    const newCourse = {
+      name: 'Java Programming',
+      code: 'JAVA101',
+      credits: 5,
+      enrolled: false,
+      gradeStatus: 'pending' as const
+    };
+    this.courseService.createCourse(newCourse).subscribe({
+      next: (course) => {
+        console.log('Course Added:', course);
+        this.courses.push(course);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
+  updateFirstCourse(): void {
+    const updatedCourse = {
+      id: 1,
+      name: 'Advanced Angular',
+      code: 'ANG999',
+      credits: 5,
+      enrolled: false,
+      gradeStatus: 'passed' as const
+    };
+    this.courseService.updateCourse(updatedCourse).subscribe({
+      next: (course) => {
+        console.log('Updated:', course);
+        this.loadCourses();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
+  deleteCourse(id: number): void {
+    this.courseService.deleteCourse(id).subscribe({
+      next: () => {
+        console.log('Deleted');
+        this.loadCourses();
+      },
+      error: (err) => {
+        console.error(err);
       }
     });
   }

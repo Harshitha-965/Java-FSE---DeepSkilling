@@ -1,32 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseCard } from '../../components/course-card/course-card';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, AsyncPipe } from '@angular/common';
 import { HighlightDirective } from '../../directives/highlight';
-import { CourseService } from '../../services/course';
 import { Course } from '../../models/course.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { selectAllCourses } from '../../store/course/course.selectors';
+import { loadCourses } from '../../store/course/course.actions';
 
 @Component({
   selector: 'app-course-list',
-  imports: [CourseCard, NgFor, NgIf, HighlightDirective, FormsModule],
+  imports: [
+    CourseCard,
+    NgFor,
+    NgIf,
+    AsyncPipe,
+    HighlightDirective,
+    FormsModule
+  ],
   templateUrl: './course-list.html',
   styleUrl: './course-list.css',
 })
-export class CourseList implements OnInit{
-  isLoading = true;
-  courses: Course[] = []
+export class CourseList implements OnInit {
+
+  courses$!: Observable<Course[]>;
+
   searchTerm = '';
-  errorMessage = '';
+
+  selectedCourseId: number | null = null;
 
   constructor(
-    private courseService: CourseService,
+    private store: Store,
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
-  selectedCourseId: number | null = null;
 
   onEnroll(courseId: number): void {
     console.log('Enrolling in course: ' + courseId);
@@ -34,22 +45,11 @@ export class CourseList implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loadCourses();
-  }
 
-  loadCourses(): void {
-    this.isLoading = true;
-    this.courseService.getCourses().subscribe({
-      next: (courses) => {
-        this.courses = courses;
-      },
-      error: (err) => {
-        this.errorMessage = err.message;
-      },
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
+    this.courses$ = this.store.select(selectAllCourses);
+
+    this.store.dispatch(loadCourses());
+
   }
 
   // trackBy helps Angular identify list items uniquely using their ID.
@@ -79,15 +79,8 @@ export class CourseList implements OnInit{
       enrolled: false,
       gradeStatus: 'pending' as const
     };
-    this.courseService.createCourse(newCourse).subscribe({
-      next: (course) => {
-        console.log('Course Added:', course);
-        this.courses.push(course);
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
+
+    // Will be migrated to NgRx later
   }
 
   updateFirstCourse(): void {
@@ -99,26 +92,14 @@ export class CourseList implements OnInit{
       enrolled: false,
       gradeStatus: 'passed' as const
     };
-    this.courseService.updateCourse(updatedCourse).subscribe({
-      next: (course) => {
-        console.log('Updated:', course);
-        this.loadCourses();
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
+
+    // Will be migrated to NgRx later
   }
 
   deleteCourse(id: number): void {
-    this.courseService.deleteCourse(id).subscribe({
-      next: () => {
-        console.log('Deleted');
-        this.loadCourses();
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
+
+    // Will be migrated to NgRx later
+
   }
+
 }

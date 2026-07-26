@@ -1,12 +1,22 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { NgSwitch, NgSwitchCase, NgSwitchDefault, NgClass, NgStyle } from '@angular/common';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { NgSwitch, NgSwitchCase, NgSwitchDefault, NgClass, NgStyle,AsyncPipe, NgIf } from '@angular/common';
 import { HighlightDirective } from '../../directives/highlight';
 import { CreditLabelPipe } from '../../pipes/credit-label-pipe'
 import { EnrollmentService } from '../../services/enrollment';
+import { Store } from '@ngrx/store';
+
+import {
+  enrollInCourse,
+  unenrollFromCourse
+} from '../../store/enrollment/enrollment.actions';
+
+import {
+  selectEnrolledIds
+} from '../../store/enrollment/enrollment.selectors';
 
 @Component({
   selector: 'app-course-card',
-  imports: [NgSwitch, NgSwitchCase, NgSwitchDefault, NgClass, NgStyle, HighlightDirective, CreditLabelPipe],
+  imports: [NgSwitch, NgSwitchCase, NgSwitchDefault, NgClass, NgStyle, AsyncPipe, NgIf, HighlightDirective, CreditLabelPipe],
   templateUrl: './course-card.html',
   styleUrl: './course-card.css',
 })
@@ -23,10 +33,14 @@ export class CourseCard implements OnChanges{
 
   @Output()
   enrollRequested = new EventEmitter<number>();
-
+  
   isExpanded = false;
-  constructor(public enrollmentService: EnrollmentService) {}
-
+  private store = inject(Store);
+  constructor(
+    public enrollmentService: EnrollmentService
+  ) {}
+  
+  enrolledIds$ = this.store.select(selectEnrolledIds);
   ngOnChanges(changes: SimpleChanges): void {
     console.log('Course Input Changed');
     console.log('Previous Value:', changes['course']?.previousValue);
@@ -46,14 +60,30 @@ export class CourseCard implements OnChanges{
   }
 
   onEnrollClick(): void {
-      if (this.enrollmentService.isEnrolled(this.course.id)) {
-          this.enrollmentService.unenroll(this.course.id);
-      } 
-      else {
-          this.enrollmentService.enroll(this.course.id);
-      }
 
-      this.enrollRequested.emit(this.course.id);
+    if (this.enrollmentService.isEnrolled(this.course.id)) {
+
+      this.enrollmentService.unenroll(this.course.id);
+
+      this.store.dispatch(
+        unenrollFromCourse({
+          courseId: this.course.id
+        })
+      );
+
+    } else {
+
+      this.enrollmentService.enroll(this.course.id);
+
+      this.store.dispatch(
+        enrollInCourse({
+          courseId: this.course.id
+        })
+      );
+
+    }
+
+    this.enrollRequested.emit(this.course.id);
   }
   @Output()
   deleteRequested = new EventEmitter<number>();

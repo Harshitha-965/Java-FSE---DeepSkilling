@@ -30,11 +30,17 @@
 
   </div>
 
-  <button (click)="onEnrollClick()">
-    {{ enrollmentService.isEnrolled(course.id)
-        ? 'Unenroll'
-        : 'Enroll' }}
-  </button>
+  <ng-container *ngIf="enrolledIds$ | async as enrolledIds">
+
+    <button (click)="onEnrollClick()">
+
+      {{ enrolledIds.includes(course.id)
+          ? 'Unenroll'
+          : 'Enroll' }}
+
+    </button>
+
+  </ng-container>
 
   <button (click)="toggleDetails()">
     Show Details

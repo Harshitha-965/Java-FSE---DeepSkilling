@@ -2,48 +2,328 @@
 Week 5 & 6 - Angular Hands-on Notes
 ===================================
 
+Project Name:
+Student Course Portal
+
+Angular Version:
+Angular v20 (Standalone)
+
+==================================================
+HANDS-ON 1
+Environment Setup, Project Structure & First Component
+==================================================
+
 1. angular.json
 Purpose:
-Contains the Angular project configuration such as build settings, assets, styles, scripts, and development server options.
+Contains project configuration such as build, serve, assets, styles, scripts and production budgets.
 
 ------------------------------------------------------------
 
 2. tsconfig.json
 Purpose:
-The main TypeScript configuration file that defines compiler options for the entire Angular project.
+Main TypeScript compiler configuration file.
 
 ------------------------------------------------------------
 
 3. tsconfig.app.json
 Purpose:
-Extends tsconfig.json and contains TypeScript settings specifically for compiling the Angular application source code.
+Contains TypeScript compiler settings for the Angular application.
 
 ------------------------------------------------------------
 
 4. package.json
 Purpose:
-Stores project information, npm scripts, and all project dependencies required to run the Angular application.
+Contains project details, npm scripts and required dependencies.
 
 ------------------------------------------------------------
 
 5. src/main.ts
 Purpose:
-The entry point of the Angular application that bootstraps the root App component.
+Entry point of the application. Bootstraps the standalone Angular application.
 
 ------------------------------------------------------------
 
 6. src/app/app.config.ts
 Purpose:
-Configures the standalone Angular application by registering providers, routing, and other application-level settings.
+Registers application-wide providers such as routing and HttpClient.
 
 ------------------------------------------------------------
 
 7. src/app/app.ts
 Purpose:
-The root component of the Angular application that controls the main user interface.
+Root component of the Angular application.
 
 ------------------------------------------------------------
 
 8. src/index.html
 Purpose:
-The main HTML page loaded by the browser where the Angular application is rendered.
+Main HTML page where Angular renders the application.
+
+------------------------------------------------------------
+
+Notes:
+
+• ng serve starts the development server successfully.
+• ng build generates the production build inside the dist folder.
+• maximumWarning shows a warning if bundle size exceeds the configured limit.
+• maximumError stops the build if bundle size exceeds the configured limit.
+
+Components Created:
+
+• Header
+• Home
+• Course List
+• Student Profile
+
+==================================================
+HANDS-ON 2
+Data Binding, Lifecycle Hooks & Component Communication
+==================================================
+
+Concepts Practiced:
+
+• String Interpolation
+• Property Binding
+• Event Binding
+• Two-way Binding using ngModel
+• ngOnInit
+• ngOnChanges
+• ngOnDestroy
+• @Input
+• @Output
+• EventEmitter
+
+Implemented:
+
+• Displayed portal name using interpolation.
+• Enabled/Disabled button using property binding.
+• Displayed enrollment message using event binding.
+• Added live search using ngModel.
+• Passed data from parent to child using @Input.
+• Sent events from child to parent using EventEmitter.
+
+==================================================
+HANDS-ON 3
+Directives & Pipes
+==================================================
+
+Concepts Practiced:
+
+• *ngIf
+• *ngFor
+• *ngSwitch
+• ngClass
+• ngStyle
+• Custom Directive
+• Custom Pipe
+
+Implemented:
+
+• Loading message using *ngIf.
+• Displayed course list using *ngFor.
+• Grade badges using *ngSwitch.
+• Dynamic classes using ngClass.
+• Dynamic styles using ngStyle.
+• Created Highlight Directive.
+• Created Credit Label Pipe.
+
+==================================================
+HANDS-ON 4
+Template Driven Forms
+==================================================
+
+Concepts Practiced:
+
+• FormsModule
+• ngForm
+• Validation
+• Error Messages
+• Form State Classes
+
+Implemented:
+
+• Enrollment form created.
+• Required validation added.
+• Email validation added.
+• Minimum length validation.
+• Submit button disabled for invalid form.
+• Success message after submission.
+• Reset button implemented.
+
+==================================================
+HANDS-ON 5
+Reactive Forms
+==================================================
+
+Concepts Practiced:
+
+• ReactiveFormsModule
+• FormBuilder
+• FormGroup
+• FormControl
+• Validators
+• FormArray
+• Custom Validators
+
+Implemented:
+
+• Reactive Enrollment Form.
+• FormBuilder used to create form.
+• Validators applied.
+• Dynamic skills using FormArray.
+• Custom validator implemented.
+• Form submitted only when valid.
+
+==================================================
+HANDS-ON 6
+Services & Dependency Injection
+==================================================
+
+Services Created:
+
+• CourseService
+• EnrollmentService
+• NotificationService
+• LoadingService
+• AuthService
+
+Concepts Practiced:
+
+• Dependency Injection
+• Singleton Services
+• Hierarchical Dependency Injection
+
+Implemented:
+
+• Course data managed using CourseService.
+• Enrollment handled using EnrollmentService.
+• Student Profile displays enrolled courses.
+• NotificationService provided at component level.
+• Service-to-service injection implemented.
+
+==================================================
+HANDS-ON 7
+Routing, Guards & Lazy Loading
+==================================================
+
+Concepts Practiced:
+
+• Angular Routing
+• Route Parameters
+• Query Parameters
+• Nested Routes
+• Lazy Loading
+• CanActivate Guard
+• CanDeactivate Guard
+
+Implemented:
+
+• Home Route
+• Course List Route
+• Course Detail Route
+• Student Profile Route
+• Not Found Page
+• Route Parameters using ActivatedRoute.
+• Search using Query Parameters.
+• Lazy Loaded Enrollment Module.
+• Auth Guard implemented.
+• Unsaved Changes Guard implemented.
+
+==================================================
+HANDS-ON 8
+HTTP Client, Observables & Interceptors
+==================================================
+
+Concepts Practiced:
+
+• HttpClient
+• GET
+• POST
+• PUT
+• DELETE
+• Observables
+• map
+• tap
+• catchError
+• switchMap
+• HTTP Interceptors
+
+Implemented:
+
+• Connected Angular application with JSON Server.
+• CourseService uses HttpClient.
+• CRUD operations completed.
+• Error handling using catchError.
+• Logging using tap.
+• AuthInterceptor added.
+• ErrorHandlerInterceptor added.
+• LoadingInterceptor added.
+• Loading spinner implemented.
+
+==================================================
+HANDS-ON 9
+NgRx State Management
+==================================================
+
+Concepts Practiced:
+
+• Store
+• Actions
+• Reducers
+• Selectors
+• Effects
+• Store DevTools
+
+Implemented:
+
+• Course State created.
+• Enrollment State created.
+• Reducers implemented.
+• Selectors implemented.
+• Effects used for HTTP calls.
+• Store connected with components.
+• Redux DevTools verified state changes.
+
+==================================================
+HANDS-ON 10
+Unit Testing
+==================================================
+
+Concepts Practiced:
+
+• Jasmine
+• Karma
+• TestBed
+• Component Testing
+• Service Testing
+• MockStore
+• HttpClient Testing
+
+Implemented:
+
+• CourseCard component tests.
+• CourseService tests.
+• EnrollmentService tests.
+• CourseList tests.
+• CourseDetail tests.
+• StudentProfile tests.
+• Home tests.
+• Header tests.
+• App tests.
+• CourseSummaryWidget tests.
+• Highlight Directive tests.
+• CreditLabel Pipe tests.
+• Auth Guard tests.
+• Unsaved Changes Guard tests.
+• Auth Interceptor tests.
+• Error Handler Interceptor tests.
+• Loading Interceptor tests.
+• Notification Service tests.
+• Loading Service tests.
+• Auth Service tests.
+
+Final Output:
+
+30 Specs
+0 Failures
+

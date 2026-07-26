@@ -45,12 +45,12 @@
       "courseId": 2
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Priya",
       "courseId": 2
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Karthik",
       "courseId": 3
     }

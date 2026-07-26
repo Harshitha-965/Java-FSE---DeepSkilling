@@ -1,3 +1,9 @@
 <app-header></app-header>
+<div *ngIf="loadingService.isLoading$ | async">
 
+    <h2>Loading...</h2>
+
+</div>
+
+<router-outlet></router-outlet>
 <router-outlet></router-outlet>

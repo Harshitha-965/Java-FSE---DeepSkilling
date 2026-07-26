@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { CourseSummaryWidget } from './course-summary-widget';
 
@@ -8,9 +10,12 @@ describe('CourseSummaryWidget', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CourseSummaryWidget]
-    })
-    .compileComponents();
+      imports: [CourseSummaryWidget],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CourseSummaryWidget);
     component = fixture.componentInstance;

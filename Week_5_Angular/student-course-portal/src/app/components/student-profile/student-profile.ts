@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { EnrollmentService } from '../../services/enrollment';
 import { Course } from '../../models/course.model';
-
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { CourseService } from '../../services/course';
 @Component({
   selector: 'app-student-profile',
   imports: [NgIf, NgFor],

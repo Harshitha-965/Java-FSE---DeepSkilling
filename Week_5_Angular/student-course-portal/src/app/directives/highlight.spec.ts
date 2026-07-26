@@ -1,8 +1,10 @@
-import { Highlight } from './highlight';
+import { HighlightDirective } from './highlight';
+import { ElementRef } from '@angular/core';
 
-describe('Highlight', () => {
+describe('HighlightDirective', () => {
   it('should create an instance', () => {
-    const directive = new Highlight();
+    const mockElement = new ElementRef(document.createElement('div'));
+    const directive = new HighlightDirective(mockElement);
     expect(directive).toBeTruthy();
   });
 });
